@@ -13,6 +13,17 @@ public class User {
 		this.type = type;
 		this.paymentPlan = paymentPlan;
 	}
+
+	public User(String name, String password) {
+		this.name = name;
+		this.password = password;
+	}
+
+	public User(String name, String type, int paymentPlan) {
+		this.name = name;
+		this.type = type;
+		this.paymentPlan = paymentPlan;
+	}
 	
 	public int getId() {
 		return id;

@@ -3,6 +3,8 @@ package presentation;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import bll.UserBLL;
+import model.User;
 
 public class StartGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -21,7 +26,7 @@ public class StartGUI extends JFrame{
 
 	private JTextField nameText = new JTextField();
 	private JTextField passwordText = new JPasswordField();
-	
+
 	private JButton createAccountButton = new JButton("Create account");
 	private JButton loginButton = new JButton("Login");
 
@@ -82,8 +87,30 @@ public class StartGUI extends JFrame{
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginGUI loginGUI;
-				loginGUI = new LoginGUI();
-				loginGUI.setVisible(true);
+				RecommendGUI recommendGUI;
+				StaffGUI staffGUI;
+				String name = nameText.getText();
+				String password = passwordText.getText();
+
+				User user = new User(name, password);
+				UserBLL userBLL = new UserBLL();
+
+				if(userBLL.isUser(user) == true) {
+					if(name.contains("STAFF")) {
+						try {
+							staffGUI = new StaffGUI();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} else {
+						loginGUI = new LoginGUI(user);
+						loginGUI.setVisible(true);
+						recommendGUI = new RecommendGUI();
+						recommendGUI.setVisible(true);
+					}
+
+				}
 			}
 		});
 	}
