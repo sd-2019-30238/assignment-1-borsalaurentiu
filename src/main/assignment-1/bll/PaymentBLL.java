@@ -29,6 +29,10 @@ public class PaymentBLL {
 		}
 		return payment;
 	}
+	
+	public String isVerified(String name) {
+		return PaymentDAO.isVerified(name);
+	}
 
 	public int insertPayment(String name, Payment payment) {
 		for (Validator<Payment> v : validators) {

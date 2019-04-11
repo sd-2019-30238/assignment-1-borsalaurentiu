@@ -1,9 +1,17 @@
 package start;
 
-public class TrendsRecommendation implements Recommendation {
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-	public void giveRecommendation() {
-	      System.out.println(this.getClass().getName());	
+import bll.BookBLL;
+import model.Book;
+
+public class TrendsRecommendation implements Recommendation {	
+	
+	public ArrayList<Book> giveRecommendation() throws SQLException {
+		ArrayList<Book> array = new ArrayList<Book>();
+		BookBLL bookBll = new BookBLL();
+		array = bookBll.getBooks();
+		return array;
 	}
-
 }

@@ -104,10 +104,20 @@ public class StartGUI extends JFrame{
 							e1.printStackTrace();
 						}
 					} else {
-						loginGUI = new LoginGUI(user);
-						loginGUI.setVisible(true);
-						recommendGUI = new RecommendGUI();
-						recommendGUI.setVisible(true);
+						try {
+							loginGUI = new LoginGUI(user);
+							loginGUI.setVisible(true);
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						try {
+							recommendGUI = new RecommendGUI();
+							recommendGUI.setVisible(true);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 
 				}

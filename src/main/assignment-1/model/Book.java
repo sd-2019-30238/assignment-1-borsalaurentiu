@@ -5,10 +5,10 @@ public class Book {
 	private String title;
 	private String author;
 	private String genre;
-	private String releaseDate;
-	private boolean available;
-	
-	public Book(String title, String author, String genre, String releaseDate, boolean available) {
+	private int releaseDate;
+	private int available;
+
+	public Book(String title, String author, String genre, int releaseDate, int available) {
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
@@ -48,20 +48,26 @@ public class Book {
 		this.genre = genre;
 	}
 
-	public String getReleaseDate() {
+	public int getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(String releaseDate) {
+	public void setReleaseDate(int releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
-	public boolean isAvailable() {
+	public int isAvailable() {
 		return available;
 	}
 
-	public void setAvailable(boolean available) {
+	public void setAvailable(int available) {
 		this.available = available;
+	}
+
+	@Override
+	public String toString() {
+		return "<html>Title : " + title + "<br>Author : " + author + "<br>Genre : " + genre + "<br>ReleaseDate : " + releaseDate
+				+ "<br>Available : " + (available == 1 ? " yes" : " no") + "</html>";
 	}
 	
 }

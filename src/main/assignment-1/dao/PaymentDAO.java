@@ -19,7 +19,8 @@ public class PaymentDAO {
 	private final static String findStatementString = "SELECT * FROM payment where id = ?";
 	private final static String findStatementNameString = "SELECT * FROM payment where name = ?";
 	private final static String findVerifiedStatementString = "SELECT * FROM payment";
-	private final static String updateStatementString = "UPDATE payment SET verified = ? where name = ?";
+	private final static String isVerifiedStatementString = "SELECT verified FROM payment where name = ?";
+	private final static String updateStatementString = "UPDATE payment SET verified = ?, credit = credit - totalAmount where name = ?";
 	
 
 	public static Payment findById(int paymentId) {
@@ -140,5 +141,28 @@ public class PaymentDAO {
 			ConnectionFactory.close(dbConnection);
 		}
 		
+	}
+	
+	public static String isVerified(String name) {
+		String toReturn = "no";
+
+		Connection dbConnection = ConnectionFactory.getConnection();
+		PreparedStatement findStatement = null;
+		ResultSet rs = null;
+		try {
+			findStatement = dbConnection.prepareStatement(isVerifiedStatementString);
+			findStatement.setString(1, name);
+			rs = findStatement.executeQuery();
+			rs.next();
+
+			toReturn = rs.getString("verified");
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING,"PaymentDAO::isVerified " + e.getMessage());
+		} finally {
+			ConnectionFactory.close(rs);
+			ConnectionFactory.close(findStatement);
+			ConnectionFactory.close(dbConnection);
+		}
+		return toReturn;
 	}
 }
