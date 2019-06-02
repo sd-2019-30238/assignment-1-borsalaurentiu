@@ -41,7 +41,7 @@ public class UserBLL {
 	}
 
 	public int findUserByName(String name) {
-		int exist = UserDAO.findByName(name);
+		int exist = 1; //UserDAO.findByName(name);
 		if (exist != 0) {
 			throw new NoSuchElementException("The user with name =" + name + " was found!");
 		}
@@ -54,11 +54,11 @@ public class UserBLL {
 		}
 		return true;
 	}
-	public int insertUser(User user) {
-		for (Validator<User> v : validators) {
-			v.validate(user);
-		}
-		return UserDAO.insert(user);
+	public boolean insertUser(User user) {
+		if(!UserDAO.findByName(user.getName()))
+			return UserDAO.insert(user);
+		else
+			return false;
 	}
 
 	public ArrayList<User> getUsers(String type) throws SQLException{

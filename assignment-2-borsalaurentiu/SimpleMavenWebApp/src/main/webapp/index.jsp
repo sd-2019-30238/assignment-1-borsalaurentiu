@@ -1,24 +1,24 @@
 <html>
+<head> 
+	<title>Login</title>
+</head>
 <body>
-	<center>
-		<table>
-			<form action="servlet1" method="post">
+	<center><br><br><br><br><br>
+		<table border = "1">
+			<form action="LoginServlet" method="post">
 				<tr>
-					<td><center>Name:</center></td>
-					<td><input type="text" name="username"></td>
+					<td><center>Username </td>
+					<td><input type="text" name="name"></td>
 				</tr>
 				<tr>
-					<td><center>Password:</center></td>
-					<td><input type="password" name="userpass"></td>
+					<td><center>Password </td>
+					<td><input type="password" name="password"></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td><center>
-							<input type="submit" value="login">
-						</center></td>
-				</tr>
-			</form>
-		</table>
+		</table><br>
+		<input type="submit" value="Login">
+		</form><br><br>
+		
+		<center>Not registered? <a href="./newAccount.jsp">Create new account!</a></center>
 	</center>
 </body>
 </html>
